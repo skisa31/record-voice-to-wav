@@ -46,9 +46,9 @@ io.on('connection', (socket: socketio.Socket) => {
 
         exportWAV(f32array, sampleRate, filename);
         ack({ filename: filename });
-        const smilePath: string = '/Users/ssakai/prog/node-web-audio-api-test/util/opensmile/build/progsrc/smilextract/SMILExtract'; // SMILExtractのパス
-        const configPath: string = '/Users/ssakai/prog/node-web-audio-api-test/util/opensmile/config/demo/demo1_energy.conf'; // コンフィグファイルのパス
-        const outputPath: string = `/Users/ssakai/prog/record-voice-to-wav/dist/output/${String(date)}.csv`; // openSMILEの結果の保存先
+        const smilePath: string = `${__dirname}/util/opensmile/build/progsrc/smilextract/SMILExtract`; // SMILExtractのパス
+        const configPath: string = `${__dirname}/util/opensmile/config/demo/demo1_energy.conf`; // configファイルのパス
+        const outputPath: string = `${__dirname}/dist/output/${String(date)}.csv`; // openSMILEの結果の保存先
 
         child_process.exec(`${smilePath} -C ${configPath} -I ${filename} -O ${outputPath}`, (error, stdout, stderr) => {
             if (error) {
