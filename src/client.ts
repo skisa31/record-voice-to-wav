@@ -18,7 +18,7 @@ function startRecording() {
     const media: { audio: boolean, video: boolean } = {
         audio: true,
         video: false
-    };
+    }
     navigator.mediaDevices.getUserMedia(media).then((stream) => { // ブラウザへのアクセス要求
         localstream = stream;
         const source: MediaStreamAudioSourceNode = context.createMediaStreamSource(localstream);
@@ -28,7 +28,7 @@ function startRecording() {
         processor.onaudioprocess = (e) => {
             const voice: Float32Array = e.inputBuffer.getChannelData(0); // マイクから取得した音声をPCMデータに変換
             socket.emit('send_pcm', voice.buffer); // PCMデータをサーバへ送信
-        };
+        }
         /*
         ScriptProcessorはAudioWorkletに置き換え推奨だけどまだ途中
         context.audioWorklet.addModule('processors.js').then(() => {

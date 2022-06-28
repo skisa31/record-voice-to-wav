@@ -47,8 +47,8 @@ io.on('connection', (socket: socketio.Socket) => {
         exportWAV(f32array, sampleRate, filename);
         ack({ filename: filename });
         const smilePath: string = `${__dirname}/util/opensmile/build/progsrc/smilextract/SMILExtract`; // SMILExtractのパス
-        const configPath: string = `${__dirname}/util/opensmile/config/demo/demo1_energy.conf`; // configファイルのパス
-        const outputPath: string = `${__dirname}/dist/output/${String(date)}.csv`; // openSMILEの結果の保存先
+        const configPath: string = `${__dirname}/util/opensmile/config/emobase/emobase_live4_custom.conf`; // configファイルのパス
+        const outputPath: string = `${__dirname}/dist/output/${String(date)}.txt`; // openSMILEの結果の保存先
 
         child_process.exec(`${smilePath} -C ${configPath} -I ${filename} -O ${outputPath}`, (error, stdout, stderr) => {
             if (error) {
@@ -68,7 +68,7 @@ const toF32Array = (buf: Array<number>): Float32Array => {
         view[i] = buf[i];
     }
     return new Float32Array(buffer);
-};
+}
 
 // wav-encoderを使ってFloat32Arrayをwavファイルに変換してfilenameに保存
 const exportWAV = (data: Float32Array, sampleRate: number, filename: string): void => {
@@ -85,4 +85,4 @@ const exportWAV = (data: Float32Array, sampleRate: number, filename: string): vo
             }
         });
     });
-};
+}
